@@ -3,7 +3,7 @@
     include "../model/pdo.php";
     include "../model/danhmuc.php";
     include "../model/sanpham.php";
-    
+    include "../model/khachhang.php";
 ?>
 
 
@@ -37,6 +37,7 @@
                             include "trangchu/trangchu.php";
                             break;
                         }
+                        // Danh mục
                         case "dsdm":{
                             $dsdm = danhsach_danhmuc();
                             include "danhmuc/list-danhmuc.php";
@@ -71,7 +72,7 @@
                             break;
                         }
 
-                        
+                        // Sản phẩm
                         case "dssp":{
                             $dssp = danhsach_sanpham();
                             include "sanpham/list-sanpham.php";
@@ -123,6 +124,52 @@
                             if(isset($_GET['idsp']) && $_GET['idsp'] > 0){
                                 delete_sanpham($_GET['idsp']);
                                 header("location: ?act=dssp");
+                            }
+                            break;
+                        }
+
+                        // Khách hàng
+                        case "dskh":{
+                            $dskh = danhsach_khachhang();
+                            include "khachhang/list-khachhang.php";
+                            break;
+                        }
+                        case "addkh":{
+                            if(isset($_POST['btnsubmit'])){
+                                $tenkh = $_POST['tenkh'];
+                                $password = $_POST['password'];
+                                $email = $_POST['email'];
+                                $address = $_POST['address'];
+                                $tel = $_POST['tel'];
+                                $role = $_POST['role'];
+                                add_khachhang($tenkh, $password, $email, $address, $tel, $role);
+                                header("location: ?act=dskh");
+                            }
+                            include "khachhang/add-khachhang.php";
+                            break;
+                        }
+                        case "editkh":{
+                            if(isset($_GET['idkh']) & $_GET['idkh'] > 0){
+                                $khachhang = getone_khachhang($_GET['idkh']);
+                            }
+                            if(isset($_POST['btnsubmit'])){
+                                $tenkh = $_POST['tenkh'];
+                                $password = $_POST['password'];
+                                $email = $_POST['email'];
+                                $address = $_POST['address'];
+                                $tel = $_POST['tel'];
+                                $role = $_POST['role'];
+                                $idkh = $_POST['idkh'];
+                                update_khachhang($tenkh, $password, $email, $address, $tel, $role, $idkh);
+                                header("location: ?act=dskh");
+                            }
+                            include "khachhang/edit-khachhang.php";
+                            break;
+                        }
+                        case "deletekh":{
+                            if(isset($_GET['idkh']) && $_GET['idkh'] > 0){
+                                delete_khachhang($_GET['idkh']);
+                                header("location: ?act=dskh");
                             }
                             break;
                         }

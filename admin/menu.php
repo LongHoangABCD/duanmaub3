@@ -14,7 +14,7 @@
                     <a class="nav-link" href="?act=dssp">Sản phẩm</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Khách hàng</a>
+                    <a class="nav-link" href="?act=dskh">Khách hàng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Đơn hàng</a>
